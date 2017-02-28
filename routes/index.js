@@ -70,6 +70,40 @@ router.get('/addCmdToQueue',function(req,res,next){
 	});
 	console.log(params);*/
 });
+router.get('/fetchTask',function(req,res,next){
+	var params = req.query;
+	var id = parseInt(params.id);
+	var onConnect=function(err,db){
+		if(err){
+			console.log(err);
+			res.status(500).send("Db error");
+		}else{
+			var collection = db.collection("cmd");
+			var query = {
+				'_id':id
+			};
+			collection.findOne(query,function(err,doc){
+				if(err){
+					console.log(err);
+					db.close();
+					res.status(500).send("Find error");
+				}else{
+					var cmd = doc.cmd;
+					res.status(200).send(cmd);
+					
+					db.close()
+				}
+			});
+		}
+	
+	}
+	MongoApi.connect(onConnect);
+	//console.log(db);
+	/*db.collection('cmds').findOne({},function(err,doc){
+		if(err){console.log(err);}else{console.log(doc);}
+	});
+	console.log(params);*/
+});
 router.get('/init',function(req,res,next){
 	var params = req.query;
 	var id = parseInt(params.id);
