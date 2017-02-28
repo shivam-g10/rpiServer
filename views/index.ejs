@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+	<script>
+		function initProcess(){
+			var xhr = new XMLHttpRequest();
+			var method = "GET";
+			var URL = '/init';
+			xhr.onreadystatechange = function(){
+				if(this.readyState == 4 && this.status == 200){
+						alert(xhr.responseText);
+					}else{
+						console.log(xhr.status);
+					}
+			};
+			xhr.open(method,URL,true);
+			xhr.send();
+		}
+		function fetchCMD(){
+			var table = document.getElementsByTagName("table")[0];
+			table.innerHTML = "<tr><th>Time</th><th>Task</th></tr>";
+			var xhr = new XMLHttpRequest();
+			var method = "GET";
+			var URL = '/fetchCMD';
+			xhr.onreadystatechange = function(){
+				if(this.readyState == 4 && this.status == 200){
+						alert(xhr.responseText);
+					}else{
+						console.log(xhr.status);
+					}
+			};
+			xhr.open(method,URL,true);
+			xhr.send();
+			
+		}
+	</script>
+  </head>
+  <body>
+    <h1>Rpi control</h1>
+    <button onclick="initProcess()">Init</button>
+	<button onclick="fetchCMD()">Schdeule Tasks</button>
+	<table>
+	</table>
+  </body>
+</html>
