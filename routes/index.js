@@ -2,7 +2,7 @@ var express = require('express');
 var request = require('request');
 var path = require('path');
 var router = express.Router();
-var MongoApi = require(path.join(__dirname+"/../db/db"));
+//var MongoApi = require(path.join(__dirname+"/../db/db"));
 var ID = 2;
 /* GET home page. */
 router.get('/', function(req, res, next) {
