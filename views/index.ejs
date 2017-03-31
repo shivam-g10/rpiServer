@@ -24,7 +24,7 @@
           <td><%=houses[i].controllers%></td>
           <td><ul>
             <%for(let j=0;j<houses[i].tasks.length;j++){%>
-                <li><%=JSON.parse(houses[i].tasks[j])%></li>
+                <li><%-JSON.stringify(houses[i].tasks[j])%></li>
             <%}%>
             </ul>
           </td>
