@@ -28,4 +28,29 @@ router.get('/', function(req, res, next) {
 	};
 	MongoApi.connect(onConnect);
 });
+router.get('/house/:id', function(req, res, next) {
+	var id = req.params.id;
+	let onConnect = (err,db)=>{
+		if(err){
+			log.error(err);
+			res.send("Error connecting to database");
+		}else{
+			let collection = db.collection("house_hold");
+			collection.findOne({_id:id},(err,doc)=>{
+				if(err){
+					log.error(err);
+					res.send("Error finding object");
+				}else{
+					if(doc){
+						res.render("house",{house:doc});
+					}else{
+						res.send("No object found of id : " +  id );
+					}
+				}
+			});
+		});
+	}
+};
+MongoApi.connect(onConnect);
+});
 module.exports = router;
