@@ -150,4 +150,7 @@ socketIO.connect=function(server){
 	});
 	
 };
+io.on('acknowledge',(data)=>{
+	og.info("Updated : " + data );
+});
 module.exports = socketIO;
