@@ -1,5 +1,5 @@
 var ObjectID = require('mongodb').ObjectID;
-var objectId = new ObjectID();
+
 var offset = +5.5;
 var models = {
 	
@@ -29,6 +29,7 @@ var models = {
 		modified:""
 	},
 	newObjectId : function(){
+		var objectId = new ObjectID();
 		return objectId.toHexString();
 	},
 	getDateTime: function(){
