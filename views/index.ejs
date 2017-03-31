@@ -6,7 +6,30 @@
   </head>
   <body>
 	<%if(houses){%>
-		Data : <%=houses%>
-	<%}%>
+    <table>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Controllers</th>
+        <th>Tasks</th>
+        <th>Connected</th>
+        <th>Sync</th>
+        <th>Created</th>
+        <th>Modified</th>
+      </tr>
+        <%for(let i=0;i<houses.length;i++){%>
+        <tr>
+          <td><%=houses[i]._id%></td>
+          <td><%=houses[i].name%></td>
+          <td><%=houses[i].controllers%></td>
+          <td><%=houses[i].tasks%></td>
+          <td><%=houses[i].connected%></td>
+          <td><%=houses[i].sync%></td>
+          <td><%=houses[i].created%></td>
+          <td><%=houses[i].modified%></td>
+        </tr>
+	    <%}%>
+    </table>
+   <% }%>
   </body>
 </html>
