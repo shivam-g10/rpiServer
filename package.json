@@ -1,26 +1,10 @@
 {
-<<<<<<< HEAD
   "name": "fypScripts",
-=======
-  "name": "cloudserver",
->>>>>>> 86e6bbd7efcb6cb6134ca33b7a96c26019e4edf8
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
+    "mongodb": "^2.2.25",
+    "simple-node-logger": "^0.93.17",
     "socket.io-client": "^1.7.3"
-=======
-    "body-parser": "~1.15.2",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.2.0",
-    "ejs": "~2.5.2",
-    "express": "~4.14.0",
-    "log": "^1.4.0",
-    "mongodb": "^2.2.24",
-    "morgan": "~1.7.0",
-    "request": "^2.79.0",
-    "serve-favicon": "~2.3.0",
-    "socket.io": "^1.7.3"
->>>>>>> 86e6bbd7efcb6cb6134ca33b7a96c26019e4edf8
   }
 }
