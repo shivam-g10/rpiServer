@@ -1,11 +1,15 @@
 {
+<<<<<<< HEAD
+  "name": "fypScripts",
+=======
   "name": "cloudserver",
+>>>>>>> 86e6bbd7efcb6cb6134ca33b7a96c26019e4edf8
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "start": "node ./bin/www"
-  },
   "dependencies": {
+<<<<<<< HEAD
+    "socket.io-client": "^1.7.3"
+=======
     "body-parser": "~1.15.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
@@ -17,5 +21,6 @@
     "request": "^2.79.0",
     "serve-favicon": "~2.3.0",
     "socket.io": "^1.7.3"
+>>>>>>> 86e6bbd7efcb6cb6134ca33b7a96c26019e4edf8
   }
 }
