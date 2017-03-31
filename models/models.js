@@ -27,8 +27,8 @@ var models = {
 		status:false,
 		created:"",
 		modified:""
-	}.
-	newObjectId: function(){
+	},
+	newObjectId : function(){
 		return objectId.toHexString();
 	},
 	getDateTime: function(){
