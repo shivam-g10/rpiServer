@@ -22,7 +22,12 @@
           <td><%=houses[i]._id%></td>
           <td><%=houses[i].name%></td>
           <td><%=houses[i].controllers%></td>
-          <td><%=houses[i].tasks%></td>
+          <td><ul>
+            <%for(let j=0;j<houses[i].tasks.length;j++){%>
+                <li><%=houses[i].tasks[j]%></li>
+            <%}%>
+            </ul>
+          </td>
           <td><%=houses[i].connected%></td>
           <td><%=houses[i].sync%></td>
           <td><%=houses[i].created%></td>
