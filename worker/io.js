@@ -29,7 +29,7 @@ socketIO.connect=function(server){
 							socket.emit("error_init",{reconnect:true});
 						}else{
 							log.info("Init : " + house._id);
-							socket.emit("sucess_init",house);
+							socket.emit("success_init",house);
 						}
 					});
 				}
