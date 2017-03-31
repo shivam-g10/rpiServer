@@ -48,9 +48,9 @@ router.get('/house/:id', function(req, res, next) {
 					}
 				}
 			});
-		});
-	}
-};
-MongoApi.connect(onConnect);
+		}
+	};
+
+	MongoApi.connect(onConnect);
 });
 module.exports = router;
