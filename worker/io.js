@@ -38,6 +38,7 @@ socketIO.connect=function(server){
 		});
 		socket.on('reconnect',(data)=>{
 			if(data._id){
+				log.info(data);
 				let onConnect = (err,db)=>{
 					if(err){
 						log.error(err);
