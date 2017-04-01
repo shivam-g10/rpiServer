@@ -3,7 +3,7 @@ var path = require("path");
 var db = require(path.join(__dirname,"doa","db"));
 var model = require(path.join(__dirname,"models","models"));
 const log = require('simple-node-logger').createSimpleLogger('project.log');
-var args = process.argv.slice(2);
+//var args = process.argv.slice(1);
 var COL_HOUSE = "house"
 var io = socketIo.connect("https://fyp-13bec0547.herokuapp.com/",{reconnect: true});
 io.on("connect",(data)=>{
@@ -12,14 +12,15 @@ io.on("connect",(data)=>{
 io.on("connected",(data)=>{
 	console.log("connected");
 	if(data.connected){
-		var onFind = function(err,data){
+		var onFind = function(err,d){
 			if(err){
 				log.info(err);
 			}else{
-				if(data){
-					reconnect(data);
+				console.log(d);
+				if(d.length!=0){
+					reconnect(d[0]);
 				}else{
-					io.emit("init",{name:args.join(" ")});
+					io.emit("init",{name:"somename"});
 				}
 			}
 		}
@@ -33,9 +34,10 @@ console.log("succes_init");
 			log.info(err);
 		}else{
 			log.info("Inserted doc : " + JSON.stringify(doc));
+			reconnect(doc.ops[0]);
 		}
 	}
-	db.insert(data,onInsert);
+	db.insert(COL_HOUSE,data,onInsert);
 });
 io.on("success_connect",(data)=>{
 console.log("success_connect");
@@ -98,7 +100,7 @@ console.log("need_sync");
 			db.update(COL_HOUSE,{_id:doc[0]},doc[0],onUpdate);
 		}
 	};
-	db.findAll(onFind);
+	db.findAll(COL_HOUSE,onFind);
 });
 io.on("error_db",(data)=>{
 	console.log("error_db");
