@@ -147,10 +147,10 @@ socketIO.connect=function(server){
 				}
 			});
 		});
+		socket.on('acknowledge',(data)=>{
+			log.info("Updated : " + data );
+		});
 	});
-	
 };
-io.on('acknowledge',(data)=>{
-	og.info("Updated : " + data );
-});
+
 module.exports = socketIO;
