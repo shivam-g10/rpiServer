@@ -92,6 +92,7 @@ class SocketIO{
 				}
 			});
 			socket.on('rpiSync',(data)=>{
+				console.log(data);
 				if(data.modified){
 					MongoApi.connect((err,db)=>{
 						if(err){
