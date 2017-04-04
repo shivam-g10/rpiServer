@@ -46,6 +46,7 @@ class SocketIO{
 				MongoApi.connect(onConnect);
 			});
 			socket.on('reconnect',(data)=>{
+				console.log(data);
 				if(data._id){
 					console.log(data);
 					let onConnect = (err,db)=>{
