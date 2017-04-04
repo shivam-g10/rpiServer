@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
     "mongodb": "^2.2.25",
     "simple-node-logger": "^0.93.17",
     "socket.io-client": "^1.7.3"

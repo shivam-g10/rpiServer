@@ -41,6 +41,7 @@ console.log("succes_init");
 });
 io.on("success_connect",(data)=>{
 console.log("success_connect");
+console.log(data.reconnect);
 	if(!data.reconnect){
 		var onFind = function(err,doc){
 			if(err){
@@ -58,6 +59,7 @@ console.log("success_connect");
 				db.update(COL_HOUSE,{_id:doc[0]._id},doc[0],onUpdate);
 			}
 		};
+		db.findAll(COL_HOUSE,onFind);
 	}
 });
 io.on('success_sync',(data)=>{
@@ -94,13 +96,37 @@ console.log("need_sync");
 				if(err){
 					log.info(err);
 				}else{
-					io.emit('sync',doc[0]);
+					io.emit('rpiSync',doc[0]);
 				}
 			};
 			db.update(COL_HOUSE,{_id:doc[0]},doc[0],onUpdate);
 		}
 	};
 	db.findAll(COL_HOUSE,onFind);
+});
+io.on('turnOff',(data)=>{
+	console.log("turnOff");
+	if(data.house){
+		var house = data.house;
+		var controller = data.controller;
+		house.controllers.forEach((e)=>{
+			if(e._id=controller._id){
+				db.update(COL_HOUSE,{_id:house._id},house,(err)=>{if(err){console.log(err);}});
+			}
+		});
+	}
+});
+io.on('turnOn',(data)=>{
+	console.log("turnOff");
+	if(data.house){
+		var house = data.house;
+		var controller = data.controller;
+		house.controllers.forEach((e)=>{
+			if(e._id=controller._id){
+				db.update(COL_HOUSE,{_id:house._id},house,(err)=>{if(err){console.log(err);}});
+			}
+		});
+	}
 });
 io.on("error_db",(data)=>{
 	console.log("error_db");
@@ -122,11 +148,17 @@ io.on("error_update",(data)=>{
 	console.log("error_update");
 	console.log(data);
 });
+
+io.on('error',(data)=>{
+	console.log("error");
+	console.log(data);
+});
 function sync(data){
 console.log("sync fun");
-	io.emit('sync',data);
+	io.emit('rpiSync',data);
 }
 function reconnect(data){
 console.log("reconnect fun");
-	io.emit("reconnect",data);
+console.log(data);
+	io.emit("rpiReconnect",data);
 }
