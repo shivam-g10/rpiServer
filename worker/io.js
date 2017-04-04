@@ -202,7 +202,7 @@ SocketIO.turnOn = (house,controller)=>{
 									log.error(err);
 									return null;
 								}else{
-									io.sockets.socket(mapRpiToSocket[house._id]).emit("turnOn",house);
+									io.sockets.socket(mapRpiToSocket[house._id]).emit("turnOn",{house:house,controller:controller});
 									return true;
 								}
 								db.close();
@@ -240,7 +240,7 @@ SocketIO.turnOff = (house,controller)=>{
 									log.error(err);
 									return null;
 								}else{
-									io.sockets.socket(mapRpiToSocket[house._id]).emit("turnOff",house);
+									io.sockets.socket(mapRpiToSocket[house._id]).emit("turnOff",{house:house,controller:controller});
 									return true;
 								}
 								db.close();
