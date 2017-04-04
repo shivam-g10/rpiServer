@@ -16,7 +16,7 @@ class SocketIO{
 	constructor(s){
 		server = s;
 
-		io = socketio(server);
+		var io = socketio(server);
 		io.on('connection',(socket)=>{
 			socket.emit('connected',{connected: true});
 			socket.on('init',(data)=>{
