@@ -108,7 +108,7 @@ class SocketIO{
 									if(doc){
 										var rpiDate = new Date(data.modified);
 										var serverDate = new Date(doc.modified);
-										if(rpiData>serverData){
+										if(rpiDate>serverDate){
 											doc.controllers = data.controllers;
 											doc.tasks = data.tasks;
 											doc.sync = true;
