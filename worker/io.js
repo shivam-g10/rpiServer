@@ -47,7 +47,7 @@ class SocketIO{
 			});
 			socket.on('reconnect',(data)=>{
 				if(data._id){
-					log.info(data);
+					console.log(data);
 					let onConnect = (err,db)=>{
 						if(err){
 							log.error(err);
