@@ -91,7 +91,7 @@ class SocketIO{
 					socket.emit("error_data",{reconnect:true});
 				}
 			});
-			socket.on('spiSync',(data)=>{
+			socket.on('rpiSync',(data)=>{
 				if(data.modified){
 					MongoApi.connect((err,db)=>{
 						if(err){
