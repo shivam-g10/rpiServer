@@ -1,49 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="cloud">
   <head>
     <title>CloudServer</title>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
 
 
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-	<%if(houses){%>
-    <table>
-      <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Controllers</th>
-        <th>Tasks</th>
-        <th>Connected</th>
-        <th>Sync</th>
-        <th>Created</th>
-        <th>Modified</th>
-      </tr>
-        <%for(let i=0;i<houses.length;i++){%>
-        <tr>
-          <td><a href="/house/<%=houses[i]._id%>">View</a></td>
-          <td><%=houses[i]._id%></td>
-          <td><%=houses[i].name%></td>
-          <td><%=houses[i].controllers%></td>
-          <td><ul>
-            <%for(let j=0;j<houses[i].tasks.length;j++){%>
-                <li><%-JSON.stringify(houses[i].tasks[j])%></li>
-            <%}%>
-            </ul>
-          </td>
-          <td><%=houses[i].connected%></td>
-          <td><%=houses[i].sync%></td>
-          <td><%=houses[i].created%></td>
-          <td><%=houses[i].modified%></td>
-        </tr>
-	    <%}%>
-    </table>
-   <% }%>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
-  </body>
+	<script src="/bower/angular/angular.min.js"></script>
+	<script src="/bower/angular-route/angular-route.min.js"></script>
+
+  </head>
+  <body>
+	
+	  <nav>
+		<div class="nav-wrapper">
+		  <a href="#" class="brand-logo">CloudServer</a>
+		 <!-- <ul id="nav-mobile" class="right hide-on-med-and-down">
+			<li><a href="sass.html">Sass</a></li>
+			<li><a href="badges.html">Components</a></li>
+			<li><a href="collapsible.html">JavaScript</a></li>
+		  </ul>-->
+		</div>
+	  </nav>
+	  <ng-view></ng-view>
+	  <script src="/javascripts/angular-app.js"></script>
+	   <script src="/javascripts/helper.js"></script>
+	   <script src="/javascripts/angular-controllers.js"></script>
+	    <script src="/javascripts/angular-route.js"></script>
+	</body>
+  
 </html>

@@ -1,0 +1,24 @@
+{
+  "name": "y",
+  "description": "y",
+  "main": "y",
+  "authors": [
+    "BurnUalive <burnualive@hotmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "y"
+  ],
+  "homepage": "https://github.com/BurnUalive/rpiServer",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-route": "^1.6.4"
+  }
+}

@@ -6,9 +6,12 @@ var log  = new LOG();
 var router = express.Router();
 var MongoApi = require(path.join(__dirname+"/../db/db"));
 var model = require(path.join(__dirname+"/../models/models"));
-var currentConnections  = {};
+var sockets = require(path.join(__dirname+"/../worker/io"));
 /* GET home page. */
 router.get('/', function(req, res, next) {
+	res.render("index");
+});
+router.get("/getData",(req,res,next)=>{
 	let onConnect = (err,db)=>{
 		if(err){
 			log.error(err);
@@ -22,11 +25,14 @@ router.get('/', function(req, res, next) {
 				}else{
 					log.error("No house holds");
 				}
-				res.render('index',{houses:data});
+				res.send({houses:data});
 			});
 		}
 	};
 	MongoApi.connect(onConnect);
+});
+router.get("/main",(req,res,next)=>{
+	res.render("main");
 });
 router.get('/house/:id', function(req, res, next) {
 	var id = req.params.id;
@@ -48,6 +54,36 @@ router.get('/house/:id', function(req, res, next) {
 					}
 				}
 			});
+		}
+	};
+
+	MongoApi.connect(onConnect);
+});
+router.post('/house/trunOn', function(req, res, next) {
+	var house = req.body.house;
+	var controller = req.body.controller;
+	let onConnect = (err,db)=>{
+		if(err){
+			log.error(err);
+			res.send("Error connecting to database");
+		}else{
+			log.info("turnOn",house,controller);
+			res.send(sockets.turnOn(house,controller));
+		}
+	};
+
+	MongoApi.connect(onConnect);
+});
+router.post('/house/trunOff', function(req, res, next) {
+	var house = req.body.house;
+	var controller = req.body.controller;
+	let onConnect = (err,db)=>{
+		if(err){
+			log.error(err);
+			res.send("Error connecting to database");
+		}else{
+			log.info("turnOff",house,controller);
+			res.send(sockets.turnOff(house,controller));
 		}
 	};
 
