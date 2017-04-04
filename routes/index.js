@@ -26,6 +26,7 @@ router.get("/getData",(req,res,next)=>{
 					log.error("No house holds");
 				}
 				res.send({houses:data});
+				db.close();
 			});
 		}
 	};
