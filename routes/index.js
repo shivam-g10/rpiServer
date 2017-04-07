@@ -63,6 +63,8 @@ router.get('/house/:id', function(req, res, next) {
 router.post('/house/trunOn', function(req, res, next) {
 	var house = req.body.house;
 	var controller = req.body.controller;
+	console.log(house);
+	console.log(controller);
 	let onConnect = (err,db)=>{
 		if(err){
 			log.error(err);

@@ -37,7 +37,7 @@ class SocketIO{
 						ctrl1.modified = model.getDateTime();
 						ctrl1.created = model.getDateTime();
 						let ctrl2 = model.controller;
-						ctrl2._id = "socket1";
+						ctrl2._id = "socket2";
 						ctrl2.name= ctrl1._id;
 						ctrl2.modified = model.getDateTime();
 						ctrl2.created = model.getDateTime();
@@ -192,6 +192,9 @@ class SocketIO{
 };
 
 SocketIO.turnOn = (house,controller)=>{
+	console.log(JSON.stringify(house));
+	console.log(JSON.stringify(controllers));
+	console.log(mapRpiToSocket);
 	if(mapRpiToSocket[house._id]){
 		MongoApi.connect((err,db)=>{
 			if(err){
