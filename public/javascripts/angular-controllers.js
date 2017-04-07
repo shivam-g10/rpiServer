@@ -12,7 +12,7 @@ controllers.main = function($scope,$http){
 	$scope.setup =function(){
 		houses($scope,$http);
 	};
-	$scope.toggelSwitch = function(house){
+	function test(house){
 		console.log(house);
 		var controllerId = $("#"+house._id).find("select").val();
 		console.log(controllerId);
@@ -38,5 +38,6 @@ controllers.main = function($scope,$http){
 		}
 		
 	}
+	$scope.toggelSwitch = test;
 };
 app.controller(controllers);
