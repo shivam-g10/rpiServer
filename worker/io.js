@@ -31,20 +31,28 @@ class SocketIO{
 						house.created = model.getDateTime();
 						house.modified = model.getDateTime();
 						house.name = data.name;
-						let ctrl1 = model.controller;
+						let ctrl1 = {};
 						ctrl1._id = "socket1";
 						ctrl1.name= ctrl1._id;
+						ctrl1.status = false;
 						ctrl1.modified = model.getDateTime();
 						ctrl1.created = model.getDateTime();
+						console.log("ctrl1 : " + JSON.stringify(ctrl1));
 						house.controllers.push(ctrl1);
-						let ctrl2 = model.controller;
+						console.log("house 1 : " + JSON.stringify(house));
+						let ctrl2 ={};
 						ctrl2._id = "socket2";
-						ctrl2.name= ctrl1._id;
+						ctrl2.name= ctrl2._id;
+						ctrl2.status = false;
 						ctrl2.modified = model.getDateTime();
 						ctrl2.created = model.getDateTime();
+						console.log(JSON.stringify(house));
+						console.log("ctrl2 : " + JSON.stringify(ctrl2));
 						house.controllers.push(ctrl2);
+						
+						console.log("house 2 : " + JSON.stringify(house));
 						collection.insert(house,(err,doc)=>{
-							if(err){
+							if(err){	
 								log.error(err);
 								socket.emit("error_init",{reconnect:true});
 							}else{
@@ -193,7 +201,7 @@ class SocketIO{
 
 SocketIO.turnOn = (house,controller)=>{
 	console.log(JSON.stringify(house));
-	console.log(JSON.stringify(controllers));
+	console.log(controller);
 	console.log(mapRpiToSocket);
 	if(mapRpiToSocket[house._id]){
 		MongoApi.connect((err,db)=>{
@@ -208,16 +216,15 @@ SocketIO.turnOn = (house,controller)=>{
 						db.close();
 						return null;
 					}else{
-							let i = house.controllers.indexOf(controller);
-							house.controllers[i].status = true;
-							house.controllers[i].modified = model.getDateTime();
+							house.controllers[controller].status = true;
+							house.controllers[controller].modified = model.getDateTime();
 							house.modified = model.getDateTime();
-							db.update({_id:house._id},house,(err)=>{
+							db.collection("house_hold").update({_id:house._id},house,(err)=>{
 								if(err){
 									log.error(err);
 									return null;
 								}else{
-									io.sockets.socket(mapRpiToSocket[house._id]).emit("turnOn",{house:house,controller:controller});
+									io.to(mapRpiToSocket[house._id]).emit("turnOn",{house:house,controller:controller});
 									return true;
 								}
 								db.close();
@@ -246,16 +253,15 @@ SocketIO.turnOff = (house,controller)=>{
 						db.close();
 						return null;
 					}else{
-							let i = house.controllers.indexOf(controller);
-							house.controllers[i].status = false;
-							house.controllers[i].modified = model.getDateTime();
+							house.controllers[controller].status = false;
+							house.controllers[controller].modified = model.getDateTime();
 							house.modified = model.getDateTime();
-							db.update({_id:house._id},house,(err)=>{
+							db.collection("house_hold").update({_id:house._id},house,(err)=>{
 								if(err){
 									log.error(err);
 									return null;
 								}else{
-									io.sockets.socket(mapRpiToSocket[house._id]).emit("turnOff",{house:house,controller:controller});
+									io.to(mapRpiToSocket[house._id]).emit("turnOff",{house:house,controller:controller});
 									return true;
 								}
 								db.close();

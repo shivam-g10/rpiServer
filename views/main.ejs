@@ -14,7 +14,7 @@
 				<option>None</option>
 				<option ng-repeat="controller in house.controllers" value="{{$index}}">{{controller.name}}</option>
 			</select>
-			<button ng-if="house.connected" class="btn col m2" ng-click="test(house)">Toggle</button>
+			<button ng-if="house.connected" class="btn col m2" ng-click="toggleSwitch(house)">Toggle</button>
 			<button ng-if="!house.connected" class="btn col m2 disabled offset-m1">Toggle</button>
 		</div>
     </div>

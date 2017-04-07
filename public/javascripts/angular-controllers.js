@@ -20,10 +20,10 @@ function test(house){
 		if(controllerId!="None"){
 			let controller = house.controllers[controllerId];
 			let url = "";
-			if(controller.status){
-				url = "/house/turnOn";
+			if(!controller.status){
+				url = "/house/trunOn";
 			}else{
-				url = "/house/turnOff";
+				url = "/house/trunOff";
 			}
 			console.log(url);
 			$http({
@@ -31,14 +31,15 @@ function test(house){
 				method:'POST',
 				data:{
 					house:house,
-					controller:controller
+					controller:controllerId
 				}
 			}).then((data)=>{
 				console.log(data);
+				$scope.setup();
 			});
 		}
 		
 	}
-	$scope.toggelSwitch = test;
+	$scope.toggleSwitch = test;
 };
 app.controller(controllers);

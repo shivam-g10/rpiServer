@@ -25,6 +25,7 @@ function houses( $scope,$http) {
         });
 }
 function test(house){
+	console.log("test");
 		console.log(house);
 		var controllerId = $("#"+house._id).find("select").val();
 		console.log(controllerId);
