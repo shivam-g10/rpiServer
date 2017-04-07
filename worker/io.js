@@ -36,12 +36,12 @@ class SocketIO{
 						ctrl1.name= ctrl1._id;
 						ctrl1.modified = model.getDateTime();
 						ctrl1.created = model.getDateTime();
+						house.controllers.push(ctrl1);
 						let ctrl2 = model.controller;
 						ctrl2._id = "socket2";
 						ctrl2.name= ctrl1._id;
 						ctrl2.modified = model.getDateTime();
 						ctrl2.created = model.getDateTime();
-						house.controllers.push(ctrl1);
 						house.controllers.push(ctrl2);
 						collection.insert(house,(err,doc)=>{
 							if(err){
