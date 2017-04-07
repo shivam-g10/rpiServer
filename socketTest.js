@@ -2,10 +2,11 @@ var socketIo = require("socket.io-client");
 var path = require("path");
 var db = require(path.join(__dirname,"doa","db"));
 var model = require(path.join(__dirname,"models","models"));
+var request = require('request');
 const log = require('simple-node-logger').createSimpleLogger('project.log');
 //var args = process.argv.slice(1);
 var COL_HOUSE = "house"
-var io = socketIo.connect("https://fyp-13bec0547.herokuapp.com/",{reconnect: true});
+var io = socketIo.connect("http://fyp-13bec0547.herokuapp.com/",{reconnect: true});
 io.on("connect",(data)=>{
 	console.log("connected");
 });
@@ -109,23 +110,34 @@ io.on('turnOff',(data)=>{
 	if(data.house){
 		var house = data.house;
 		var controller = data.controller;
-		house.controllers.forEach((e)=>{
-			if(e._id=controller._id){
-				db.update(COL_HOUSE,{_id:house._id},house,(err)=>{if(err){console.log(err);}});
-			}
-		});
+				request.get("http://192.168.43.237/"+house.controllers[controller]._id+"Off",(err,response,body)=>{
+					if(err){
+						console.log(err);
+					}else{
+						console.log(response.statusCode);
+						console.log(body);
+						db.update(COL_HOUSE,{_id:house._id},house,(err)=>{if(err){console.log(err);}});
+					}
+				});
+			
 	}
 });
 io.on('turnOn',(data)=>{
-	console.log("turnOff");
+	console.log("turnOn");
 	if(data.house){
 		var house = data.house;
 		var controller = data.controller;
-		house.controllers.forEach((e)=>{
-			if(e._id=controller._id){
-				db.update(COL_HOUSE,{_id:house._id},house,(err)=>{if(err){console.log(err);}});
-			}
-		});
+		
+				request.get("http://192.168.43.237/"+house.controllers[controller]._id+"On",(err,response,body)=>{
+					if(err){
+						console.log(err);
+					}else{
+						console.log(response.statusCode);
+						console.log(body);
+						db.update(COL_HOUSE,{_id:house._id},house,(err)=>{if(err){console.log(err);}});
+					}
+				});
+			
 	}
 });
 io.on("error_db",(data)=>{
