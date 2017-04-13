@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Todo</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- Needed for Cordova/PhoneGap (will be a 404 during development) -->
+	<script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="cordova.js"></script>
+	<script src="js/app.js"></script>
+
+  </head>
+ <body ng-app="todo">
+  <ion-side-menus>
+
+    <!-- Center content -->
+    <ion-side-menu-content>
+      <ion-header-bar class="bar-dark">
+        <h1 class="title">Control House</h1>
+      </ion-header-bar>
+      <ion-content ng-controller="cards">
+	  	<button ng-click="setup()">Reconnect</button>
+		<div class="card" ng-repeat="house in houses" id="{{house._id}}">
+	<div class="card-title center">
+		<h4 class="grey-text text-darken-4">{{house.name}}</h4>
+			<small class="green-text" ng-if="house.connected">Connected</small>
+		<small class="red-text" ng-if="!house.connected">Disconnected</small>
+	   <hr />
+	</div>
+    <div class="card-content">
+	   <div class="row">
+		   <h6 class="col m1">Switches</h6> 
+			<select name="controller" class="col m6" style="display:block">
+				<option>None</option>
+				<option ng-repeat="controller in house.controllers" value="{{$index}}">{{controller.name}}</option>
+			</select>
+			<button ng-if="house.connected" class="btn col m2" ng-click="toggleSwitch(house)">Toggle</button>
+			<button ng-if="!house.connected" disabled="!house.connected" class="btn col m2 disabled offset-m1">Toggle</button>
+		</div>
+    </div>
+  </div>
+      </ion-content>
+    </ion-side-menu-content>
+
+  </ion-side-menus>
+</body>
+</html>
